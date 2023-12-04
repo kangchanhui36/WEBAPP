@@ -291,38 +291,84 @@ function getRandomItems(array, count) {
 
 
 
-const container = document.getElementById('staticMap');
+// const container = document.getElementById('staticMap');
 
-        // 카카오맵을 생성합니다.
+//         // 카카오맵을 생성합니다.
+//         const map = new kakao.maps.Map(container, {
+//             center: new kakao.maps.LatLng(37.505332778324494, 126.91999471853968), // 중심 좌표
+//             level: 4, // 지도 확대 레벨 (클수록 더 확대됨)
+//         });
+
+//         // 마커 생성
+//         const markerPosition = new kakao.maps.LatLng(37.505332778324494, 126.91999471853968);
+//         const marker = new kakao.maps.Marker({
+//             position: markerPosition,
+//             map: map,
+//         });
+
+//         // 텍스트를 표시할 오버레이 생성
+//         const content = '<div class="marker-text">서울병역판정검사장</div>';
+//         const overlay = new kakao.maps.CustomOverlay({
+//             position: markerPosition,
+//             content: content,
+//             xAnchor: 0.5,
+//             yAnchor: 2.5,
+//         });
+//         // 줌 컨트롤을 생성합니다.
+// const zoomControl = new kakao.maps.ZoomControl();
+// map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT); // 지도 오른쪽에 줌 컨트롤 추가
+
+
+//         // 오버레이를 지도에 표시
+//         overlay.setMap(map);
+
+items.forEach(item => {
+    const li = document.createElement('li');
+    const img = document.createElement('img');
+    img.src = item.imageUrl;
+    const description = document.createElement('p');
+    description.textContent = item.description;
+    description.classList.add('item-description');
+    li.appendChild(img);
+    li.appendChild(description);
+
+    // 클릭 이벤트 리스너 등록
+    li.addEventListener('click', () => {
+        const container = document.createElement('div');
+        container.style.width = '100%';
+        container.style.height = '400px';
+
+        // 클릭한 아이템의 위도와 경도를 사용하여 지도 생성
         const map = new kakao.maps.Map(container, {
-            center: new kakao.maps.LatLng(37.505332778324494, 126.91999471853968), // 중심 좌표
-            level: 4, // 지도 확대 레벨 (클수록 더 확대됨)
+            center: new kakao.maps.LatLng(item.latitude, item.longitude),
+            level: 4,
         });
 
         // 마커 생성
-        const markerPosition = new kakao.maps.LatLng(37.505332778324494, 126.91999471853968);
+        const markerPosition = new kakao.maps.LatLng(item.latitude, item.longitude);
         const marker = new kakao.maps.Marker({
             position: markerPosition,
             map: map,
         });
 
-        // 텍스트를 표시할 오버레이 생성
-        const content = '<div class="marker-text">서울병역판정검사장</div>';
+        // 오버레이 생성
+        const content = `<div class="marker-text">${item.description}</div>`;
         const overlay = new kakao.maps.CustomOverlay({
             position: markerPosition,
             content: content,
             xAnchor: 0.5,
             yAnchor: 2.5,
         });
-        // 줌 컨트롤을 생성합니다.
-const zoomControl = new kakao.maps.ZoomControl();
-map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT); // 지도 오른쪽에 줌 컨트롤 추가
 
-
-        // 오버레이를 지도에 표시
+        // 오버레이 지도에 추가
         overlay.setMap(map);
 
+        // 지도 표시
+        document.body.appendChild(container);
+    });
 
+    recommendedList.appendChild(li);
+});
     </script>
 </body>
 

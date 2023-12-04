@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>패션스팟</title>
+    <style>
+        @font-face {
+    font-family: 'OAGothic-ExtraBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+}
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'OAGothic-ExtraBold';
+            
+
+        }
+
+        body {
+            background-color: #fff; 
+        }
+        
+
+        /* 로고 바 스타일링 */
+        .logo-bar {
+            background-color: #F8FDCF;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 180px;
+        }
+
+        /* 추천 스팟 스타일링 */
+        .recommendations {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            flex-wrap: wrap;
+            padding: 20px 30px;
+            background-color: #070946;
+            margin-bottom: 30px;
+        }
+
+        /* 목록 스타일링 */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        li {
+            width: 350px;
+            height: 450px;
+            background-color: #fff;
+            box-shadow: #7F4B96;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 36px;
+            box-shadow: 0 2px 10px #7F4B96;
+            display: flex;
+            flex-direction: column;
+            /* opacity: 0.8; */
+            gap: 10px;
+        }
+
+
+        .item-description {
+            margin-top: 10px;
+            font-size: 28px;
+            cursor: pointer;
+            cursor: auto;
+            padding: 0 20px;
+
+        }
+
+        img {
+            width: 87%;
+            height: 45%;
+            margin: 0 auto;
+            font-size: 32px;
+            /* border-radius: 36px; */
+        }
+
+        .list-container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            
+        }
+
+        #recommendedList {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-bottom: 200px;
+            
+        }
+
+        #myList {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            
+            
+        }
+
+        .logo-bar img {
+            width: 200px;
+            height: 200px;
+
+        }
+
+        .recommendations h1 {
+            padding: 50px;
+            font-size: 50px;
+            color: #fff;
+        }
+        .list-container h1, h1{
+            padding: 50px;
+            font-size: 50px;
+            color: #000;
+            text-align: center;
+        }
+        
+        /* .addtionalInfo {
+            width: 85%;
+            font-size: 20px;
+            margin: 0 auto;
+        } */
+        .additional-info {
+            font-size: 15px;
+            color: #000;
+            margin-top: 8px;
+            padding: 0 20px;
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+
+    <!-- <div class="logo-bar">
+        <img src="/img/Logo.png" alt="로고">
+    </div> -->
+
+    <div class="recommendations">
+        <h1>오늘의 추천 스팟</h1>
+        <ul id="recommendedList"></ul>
+    </div>
+
+    <div class="list-container">
+        <h1>패션스팟 목록</h1>
+        <ul id="myList"></ul>
+    </div>
+    <h1>더 많은 장소 준비중...</h1>
+    <div id="staticMap" style="width: 100%; height: 400px;"></div>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c28838cf2a769365bde72d7f8619c87e"></script>
+
+    
+
+    <script>
+        const myList = document.getElementById('myList');
+        const recommendedList = document.getElementById('recommendedList');
+
+        const items = [
+            {
+                imageUrl: 'https://media.discordapp.net/attachments/1177450426652688424/1178979549963362375/817ecd39d84f452d.jpg?ex=65781d45&is=6565a845&hm=4a8588b1bc8aabff5e19c242f82f22c6af40d65ff2a01324f79b33ec266f0e0b&=&format=webp&width=1080&height=808',
+                description: '가로수길',
+                additionalInfo: '   가로수길은 서울의 대표적인 상권으로, 유명 브랜드와 독특한 쇼핑 체험을 제공하는 길로 유명합니다. 가로수와 트렌디한 카페, 레스토랑이 모여있어 쇼핑과 함께 편안한 시간을 보낼 수 있는 곳입니다.'
+                
+            },
+            {
+                imageUrl: 'https://media.discordapp.net/attachments/1177450426652688424/1178979588077015050/2c096d57194e392a.jpg?ex=65781d4e&is=6565a84e&hm=96bacced5f085ba2d8837145ac66446d26e00a003234515ac7d62742d86594c6&=&format=webp&width=1080&height=720',
+                description: '명동 패션 거리',
+                additionalInfo: '명동 패션 거리는 서울의 유명한 쇼핑 거리로, 다양한 패션 브랜드와 상점이 모여있어 한국의 최신 패션 트렌드를 경험할 수 있습니다. 명동은 관광객과 현지인들이 모두 자주 찾는 곳으로, 활기찬 분위기와 다채로운 매력을 지닌 지역입니다.'
+            },
+            {
+                imageUrl: 'https://media.discordapp.net/attachments/1177450426652688424/1178979598520819732/cb50a8b5b9948d9a.jpg?ex=65781d50&is=6565a850&hm=57fa4650f775820af6f473e73944308a733f1ac4eb774c3c40fa281dfc8444cf&=&format=webp&width=1080&height=720',
+                description: '강남 패션 거리',
+                additionalInfo: '강남 패션 거리는 서울의 유명한 쇼핑 명소로, 고급 브랜드와 트렌디한 의류 매장들이 모여 있어 최신 패션 트렌드를 선도합니다. 특히 강남역 주변은 글로벌 패션과 럭셔리 브랜드가 입점한 곳으로 알려져 있어 스타일리시한 쇼핑 천국으로 손꼽힙니다.'
+            },
+            {
+                imageUrl: 'https://media.discordapp.net/attachments/1177450426652688424/1178979620498976838/12a850e5c7c56e37.jpg?ex=65781d55&is=6565a855&hm=a5687369b49034bcb77ffcc26236d9300ebad8287664e6a4e661b1d1f7ac720f&=&format=webp&width=1080&height=607',
+                description: '홍대 패션 거리',
+                additionalInfo: '젊은이들 사이에서 유행하는 패션 거리로, 다양한 스트릿 패션 아이템을 찾을 수 있습니다.'
+            },
+            {
+                imageUrl: 'https://media.discordapp.net/attachments/1177450426652688424/1178979633618759690/961d9c17e36c9aa6.jpg?ex=65781d59&is=6565a859&hm=82ee15c5730ebc799d6a65d495599afa0ec7c4ec92a917cf919b93a7e4f72ff7&=&format=webp&width=1080&height=694',
+                description: '고속터미널역 지하상가',
+                additionalInfo: '고속터미널역 지하상가는 서울의 대표적인 지하 쇼핑몰로, 다양한 의류, 액세서리 및 식료품 등을 파는 매장들이 모여 있습니다. 현지인과 관광객들이 자주 찾는 이곳은 저렴한 가격과 다양한 상품으로 유명합니다.'
+            },
+            {
+                imageUrl: 'https://media.discordapp.net/attachments/1177450426652688424/1178979655315894342/752bd68e13e647c9.jpg?ex=65781d5e&is=6565a85e&hm=d2e7775ce7167cc6a18d228772445631bd2523129b8313e4109329e4b8c54ab0&=&format=webp&width=1080&height=607',
+                description: '성수',
+                additionalInfo: '성수는 서울의 열띤 예술과 문화로 유명한 지역 중 하나로, 독특한 쇼핑 체험과 창의적인 브랜드들이 모여 있는 패션 거리로 손꼽힙니다. 예술적 분위기와 트렌디한 매장들이 어우러진 곳으로, 창의적이고 유니크한 스타일을 추구하는 이들에게 인기가 많습니다.'
+            },
+            {
+                imageUrl: 'https://media.discordapp.net/attachments/1177450426652688424/1178979657991847936/814c869d4dc01852.jpg?ex=65781d5e&is=6565a85e&hm=09251c5171863330ce0ac241c25719cdf9ef66ed2acddfcf6a472ccaa8f9cc71&=&format=webp&width=1080&height=810',
+                description: '메세나폴리스몰',
+                additionalInfo: '메세나폴리스몰은 서울의 현대적인 쇼핑 명소로, 다양한 패션 브랜드와 레스토랑이 있는 대규모 쇼핑몰입니다. 현대적인 인테리어와 고급스러운 분위기 속에서 쇼핑과 식사를 동시에 즐길 수 있는 곳으로 알려져 있습니다'
+            },
+            {
+                imageUrl: 'https://media.discordapp.net/attachments/1177450426652688424/1178979668293070848/8042f0ed7ea1a957.jpg?ex=65781d61&is=6565a861&hm=c5a18eb18c8b5208c47ab11736c1051f78e1a4d43f79957a23b408e8009b1c7e&=&format=webp&width=960&height=640',
+                description: '스타필드 코엑스',
+                additionalInfo: '스타필드 코엑스는 서울의 대형 쇼핑몰로, 다양한 유명 브랜드와 식음료 매장, 엔터테인먼트 시설이 모여 있습니다. 현대적이고 고급스러운 분위기에서 쇼핑과 문화적 활동을 동시에 즐길 수 있는 명실상부한 쇼핑 및 문화 명소입니다.'
+            },
+            {
+                imageUrl: 'https://media.discordapp.net/attachments/1177450426652688424/1178979695014973491/e78734d528585117.jpg?ex=65781d67&is=6565a867&hm=8a448a866d49e7f6a74903869273abced6c72f8394af65c8176b7913818779ac&=&format=webp&width=600&height=400',
+                description: '동대문 쇼핑타운',
+                additionalInfo: '동대문 쇼핑타운은 서울의 대표적인 쇼핑 명소로, 대규모 도매시장과 최신 패션 트렌드를 선도하는 쇼핑센터로 유명합니다. 다양한 옷감, 액세서리, 패션 아이템들을 저렴한 가격에 구매할 수 있으며, 끊임없는 활기찬 분위기가 특징입니다.'
+            },
+            {
+                imageUrl: 'https://media.discordapp.net/attachments/1177450426652688424/1178979702426316840/7f0f60ac28e54595.jpg?ex=65781d69&is=6565a869&hm=487131dd1bbbe2b231da3be6b34f4da90876c4314c1e90e09d40776f432b137a&=&format=webp&width=1083&height=721',
+                description: '이대 패션거리',
+                additionalInfo: ''
+            },
+            {
+                imageUrl: 'https://media.discordapp.net/attachments/1177450426652688424/1178979728976269443/317f0099b8877d20.jpg?ex=65781d6f&is=6565a86f&hm=51d9a98b92d7577ee151dbc58e7d4e5953c7949cbd0df3ee74934959bb26bbc9&=&format=webp&width=1083&height=609',
+                description: '서울역 롯데아울렛',
+                additionalInfo: ''
+            },
+            {
+                imageUrl: 'https://media.discordapp.net/attachments/1177450426652688424/1180056027597656135/3.jpg?ex=657c07d1&is=656992d1&hm=25d973fc68bdafadbc98c84dc15d8f4a985010406c04d089cd7435f78e1d853e&=&format=webp&width=1083&height=609',
+                description: '더 현대 서울',
+                additionalInfo: ''
+            }
+            // {
+            //     imageUrl: 'https://media.discordapp.net/attachments/1177450426652688424/1180055750031200306/1.jpg?ex=657c078f&is=6569928f&hm=42f62ea67c613455e376483f6da699a50618d7cf884fbe976f17fb6f36249770&=&format=webp&width=1050&height=589',
+            //     description: '서울풍물시장',
+            //     additionalInfo: ''
+            // }
+        ];
+
+        const fixedDescriptions = ['가로수길', '명동 패션 거리', '강남 패션 거리', '홍대 패션 거리', '고속터미널역 지하상가', '성수', '메세나폴리스몰', '스타필드 코엑스', '동대문 쇼핑타운', '이대 패션거리', '서울역 롯데아울렛', '더 현대 서울'];
+
+fixedDescriptions.forEach(description => {
+    const foundItem = items.find(item => item.description === description);
+    if (foundItem) {
+        const li = document.createElement('li');
+        const img = document.createElement('img');
+        img.src = foundItem.imageUrl;
+        img.alt = foundItem.description;
+
+        const descriptionPara = document.createElement('p');
+        descriptionPara.textContent = foundItem.description;
+        descriptionPara.classList.add('item-description');
+
+        const additionalInfo = document.createElement('p');
+        additionalInfo.textContent = foundItem.additionalInfo;
+        additionalInfo.classList.add('additional-info');
+
+        li.appendChild(img);
+        li.appendChild(descriptionPara);
+        li.appendChild(additionalInfo);
+        myList.appendChild(li);
+    }
+});
+
+// 기존의 랜덤 추천 아이템을 표시하는 부분은 유지됩니다.
+function displayRandomItems() {
+    const randomItems = getRandomItems(items, 3);
+
+    randomItems.forEach(item => {
+        const li = document.createElement('li');
+        const img = document.createElement('img');
+        img.src = item.imageUrl;
+        const description = document.createElement('p');
+        description.textContent = item.description;
+        description.classList.add('item-description');
+        li.appendChild(img);
+        li.appendChild(description);
+        recommendedList.appendChild(li);
+    });
+}
+
+displayRandomItems();
+
+function getRandomItems(array, count) {
+    const shuffled = array.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+}
+
+
+
+const container = document.getElementById('staticMap');
+
+        // 카카오맵을 생성합니다.
+        const map = new kakao.maps.Map(container, {
+            center: new kakao.maps.LatLng(37.505332778324494, 126.91999471853968), // 중심 좌표
+            level: 4, // 지도 확대 레벨 (클수록 더 확대됨)
+        });
+
+        // 마커 생성
+        const markerPosition = new kakao.maps.LatLng(37.505332778324494, 126.91999471853968);
+        const marker = new kakao.maps.Marker({
+            position: markerPosition,
+            map: map,
+        });
+
+        // 텍스트를 표시할 오버레이 생성
+        const content = '<div class="marker-text">서울병역판정검사장</div>';
+        const overlay = new kakao.maps.CustomOverlay({
+            position: markerPosition,
+            content: content,
+            xAnchor: 0.5,
+            yAnchor: 2.5,
+        });
+        // 줌 컨트롤을 생성합니다.
+const zoomControl = new kakao.maps.ZoomControl();
+map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT); // 지도 오른쪽에 줌 컨트롤 추가
+
+
+        // 오버레이를 지도에 표시
+        overlay.setMap(map);
+
+
+    </script>
+</body>
+
+</html>

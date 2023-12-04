@@ -319,6 +319,7 @@ function getRandomItems(array, count) {
 //         // 오버레이를 지도에 표시
 //         overlay.setMap(map);
 
+
 items.forEach(item => {
     const li = document.createElement('li');
     const img = document.createElement('img');
@@ -329,31 +330,23 @@ items.forEach(item => {
     li.appendChild(img);
     li.appendChild(description);
 
-    // 클릭 이벤트 리스너 등록
     li.addEventListener('click', () => {
-        // 모달 요소 생성
-        const modal = document.createElement('div');
-        modal.classList.add('modal');
-        
-        // 모달 내 지도를 담을 요소 생성
+        // 클릭한 아이템의 위도와 경도 정보를 이용하여 지도를 생성
         const mapContainer = document.createElement('div');
         mapContainer.style.width = '100%';
         mapContainer.style.height = '400px';
 
-        // 클릭한 아이템의 위도와 경도를 사용하여 지도 생성
         const map = new kakao.maps.Map(mapContainer, {
             center: new kakao.maps.LatLng(item.latitude, item.longitude),
             level: 4,
         });
 
-        // 마커 생성
         const markerPosition = new kakao.maps.LatLng(item.latitude, item.longitude);
         const marker = new kakao.maps.Marker({
             position: markerPosition,
             map: map,
         });
 
-        // 오버레이 생성
         const content = `<div class="marker-text">${item.description}</div>`;
         const overlay = new kakao.maps.CustomOverlay({
             position: markerPosition,
@@ -362,24 +355,14 @@ items.forEach(item => {
             yAnchor: 2.5,
         });
 
-        // 오버레이 지도에 추가
         overlay.setMap(map);
 
-        // 모달에 지도 추가
-        modal.appendChild(mapContainer);
-
-        // 닫기 버튼 생성 및 이벤트 리스너 등록
-        const closeButton = document.createElement('button');
-        closeButton.textContent = 'Close';
-        closeButton.addEventListener('click', () => {
-            modal.remove(); // 모달 닫기
-        });
-
-        // 모달에 닫기 버튼 추가
-        modal.appendChild(closeButton);
-
-        // 모달을 body에 추가하여 화면에 표시
-        document.body.appendChild(modal);
+        // 클릭한 아이템의 지도를 담을 컨테이너에 추가
+        const itemMapContainer = document.createElement('div');
+        itemMapContainer.appendChild(mapContainer);
+        
+        // 현재 선택된 아이템에 지도를 추가합니다.
+        li.appendChild(itemMapContainer);
     });
 
     myList.appendChild(li);

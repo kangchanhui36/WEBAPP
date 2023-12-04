@@ -162,10 +162,8 @@
         <ul id="myList"></ul>
     </div>
     <h1>더 많은 장소 준비중...</h1>
+
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c28838cf2a769365bde72d7f8619c87e"></script>
-
-    
-
     <script>
         const myList = document.getElementById('myList');
         const recommendedList = document.getElementById('recommendedList');
@@ -333,12 +331,17 @@ items.forEach(item => {
 
     // 클릭 이벤트 리스너 등록
     li.addEventListener('click', () => {
-        const container = document.createElement('div');
-        container.style.width = '100%';
-        container.style.height = '400px';
+        // 모달 요소 생성
+        const modal = document.createElement('div');
+        modal.classList.add('modal');
+        
+        // 모달 내 지도를 담을 요소 생성
+        const mapContainer = document.createElement('div');
+        mapContainer.style.width = '100%';
+        mapContainer.style.height = '400px';
 
         // 클릭한 아이템의 위도와 경도를 사용하여 지도 생성
-        const map = new kakao.maps.Map(container, {
+        const map = new kakao.maps.Map(mapContainer, {
             center: new kakao.maps.LatLng(item.latitude, item.longitude),
             level: 4,
         });
@@ -362,11 +365,24 @@ items.forEach(item => {
         // 오버레이 지도에 추가
         overlay.setMap(map);
 
-        // 지도 표시
-        document.body.appendChild(container);
+        // 모달에 지도 추가
+        modal.appendChild(mapContainer);
+
+        // 닫기 버튼 생성 및 이벤트 리스너 등록
+        const closeButton = document.createElement('button');
+        closeButton.textContent = 'Close';
+        closeButton.addEventListener('click', () => {
+            modal.remove(); // 모달 닫기
+        });
+
+        // 모달에 닫기 버튼 추가
+        modal.appendChild(closeButton);
+
+        // 모달을 body에 추가하여 화면에 표시
+        document.body.appendChild(modal);
     });
 
-    myList.appendChild(li); // myList에 추가
+    myList.appendChild(li);
 });
     </script>
 </body>

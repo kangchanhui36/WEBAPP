@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>패션스팟</title>
     <link rel="stylesheet" href="/static/css/sub1.css">
 </head>
-
 <body>
-
     <div class="recommendations">
         <h1>오늘의 추천 스팟</h1>
         <ul id="recommendedList"></ul>
@@ -19,18 +16,16 @@
         <!-- 모달 닫기 버튼 -->
         <span class="close" onclick="closeModal()">닫기</span>
     </div>
-
     <div class="list-container">
         <h1>패션스팟 목록</h1>
-        <ul id="myList">
-            <li class="item" data-lat="37.5665" data-lng="126.9780">아이템 1</li>
-        <li class="item" data-lat="35.6895" data-lng="139.6917">아이템 2</li>
-        </ul>
+        <ul id="myList"></ul>
     </div>
     <h1>더 많은 장소 준비중...</h1>
 
+    <script src="https://t1.daumcdn.net/mapjsapi/js/main/4.4.14/kakao.js"></script>
     <script>
         const myList = document.getElementById('myList');
+        const mapModal = document.getElementById('mapModal');
         const recommendedList = document.getElementById('recommendedList');
 
         fetch('./../json/items.json')
@@ -38,114 +33,62 @@
             .then(data => {
                 data.forEach(item => {
                     const li = document.createElement('li');
-                    const img = document.createElement('img');
-                    img.src = item.imageUrl;
-                    img.alt = item.description;
-
-                    const descriptionPara = document.createElement('p');
-                    descriptionPara.textContent = item.description;
-                    descriptionPara.classList.add('item-description');
-
-                    const additionalInfo = document.createElement('p');
-                    additionalInfo.textContent = item.additionalInfo;
-                    additionalInfo.classList.add('additional-info');
-
-                    li.appendChild(img);
-                    li.appendChild(descriptionPara);
-                    li.appendChild(additionalInfo);
-
-                    // 클릭 시 해당 아이템에 대한 지도가 표시되는 부분
-                    li.addEventListener('click', () => {
-                        const mapContainer = document.createElement('div');
-                        mapContainer.style.width = '100%';
-                        mapContainer.style.height = '400px';
-
-                        const map = new kakao.maps.Map(mapContainer, {
-                            center: new kakao.maps.LatLng(item.latitude, item.longitude),
-                            level: 4,
-                        });
-
-                        const markerPosition = new kakao.maps.LatLng(item.latitude, item.longitude);
-                        const marker = new kakao.maps.Marker({
-                            position: markerPosition,
-                            map: map,
-                        });
-
-                        const content = `<div class="marker-text">${item.description}</div>`;
-                        const overlay = new kakao.maps.CustomOverlay({
-                            position: markerPosition,
-                            content: content,
-                            xAnchor: 0.5,
-                            yAnchor: 2.5,
-                        });
-
-                        overlay.setMap(map);
-
-                        const itemMapContainer = document.createElement('div');
-                        itemMapContainer.appendChild(mapContainer);
-
-                        li.appendChild(itemMapContainer);
-                    });
-
+                    li.textContent = item.name;
+                    li.classList.add('item');
+                    li.setAttribute('data-lat', item.latitude);
+                    li.setAttribute('data-lng', item.longitude);
                     myList.appendChild(li);
                 });
 
-                function displayRandomItems() {
-                    const randomItems = getRandomItems(data, 3);
-
-                    randomItems.forEach(item => {
-                        const li = document.createElement('li');
-                        const img = document.createElement('img');
-                        img.src = item.imageUrl;
-                        const description = document.createElement('p');
-                        description.textContent = item.description;
-                        description.classList.add('item-description');
-                        li.appendChild(img);
-                        li.appendChild(description);
-                        recommendedList.appendChild(li);
+                // myList 아이템들에 이벤트 리스너 추가
+                const items = document.querySelectorAll('#myList .item');
+                items.forEach(item => {
+                    item.addEventListener('click', function() {
+                        openModal();
+                        const lat = parseFloat(this.getAttribute('data-lat'));
+                        const lng = parseFloat(this.getAttribute('data-lng'));
+                        const container = document.getElementById('kakaoMap');
+                        const options = {
+                            center: new kakao.maps.LatLng(lat, lng),
+                            level: 5
+                        };
+                        const map = new kakao.maps.Map(container, options);
                     });
-                }
+                });
 
-                displayRandomItems();
+                // 랜덤 아이템 표시 함수
+                displayRandomItems(data);
             })
             .catch(error => console.error(error));
 
-        function getRandomItems(array, count) {
-            const shuffled = array.sort(() => 0.5 - Math.random());
-            return shuffled.slice(0, count);
-        }
         // 모달 열기 함수
         function openModal() {
-            document.getElementById('mapModal').style.display = 'block';
+            mapModal.style.display = 'block';
         }
 
         // 모달 닫기 함수
         function closeModal() {
-            document.getElementById('mapModal').style.display = 'none';
+            mapModal.style.display = 'none';
         }
 
-        // myList 아이템들에 이벤트 리스너 추가
-        const items = document.querySelectorAll('#myList .item');
-        items.forEach(item => {
-            item.addEventListener('click', function() {
-                openModal();
-                const lat = parseFloat(this.getAttribute('data-lat'));
-                const lng = parseFloat(this.getAttribute('data-lng'));
-                const container = document.getElementById('kakaoMap');
-                const options = {
-                    center: new kakao.maps.LatLng(lat, lng),
-                    level: 5
-                };
-                const map = new kakao.maps.Map(container, options);
+        // 랜덤 아이템 표시 함수
+        function displayRandomItems(data) {
+            const randomItems = getRandomItems(data, 3);
+            randomItems.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item.name;
+                li.classList.add('item');
+                li.setAttribute('data-lat', item.latitude);
+                li.setAttribute('data-lng', item.longitude);
+                recommendedList.appendChild(li);
             });
-        });
+        }
+
+        // 랜덤 아이템 선택 함수
+        function getRandomItems(array, count) {
+            const shuffled = array.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
     </script>
-    <!-- Kakao 지도 API 스크립트 로드 -->
-    <script src="https://t1.daumcdn.net/mapjsapi/js/main/4.4.14/kakao.js"></script>
-<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=c28838cf2a769365bde72d7f8619c87e" async defer></script>
-
-    
-
 </body>
-
 </html>

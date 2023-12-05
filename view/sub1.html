@@ -38,6 +38,11 @@
                 data.forEach(item => {
                     const li = document.createElement('li');
                     li.textContent = item.name;
+                    li.innerHTML = `
+                        <img src="${item.imageUrl}" alt="${item.description}" />
+                        <p>${item.description}</p>
+                        <p>${item.additionalInfo}</p>
+                    `;
                     li.classList.add('item');
                     li.setAttribute('data-lat', item.latitude);
                     li.setAttribute('data-lng', item.longitude);
@@ -80,6 +85,11 @@
             randomItems.forEach(item => {
                 const li = document.createElement('li');
                 li.textContent = item.name;
+                li.innerHTML = `
+                    <img src="${item.imageUrl}" alt="${item.description}" />
+                    <p>${item.description}</p>
+                    <p>${item.additionalInfo}</p>
+                `;
                 recommendedList.appendChild(li);
             });
         }

@@ -121,6 +121,30 @@
             const shuffled = array.sort(() => 0.5 - Math.random());
             return shuffled.slice(0, count);
         }
+        document.addEventListener("scroll", function () {
+            const myListItems = document.querySelectorAll("#myList li");
+            const recommendedListItems = document.querySelectorAll("#recommendedList li");
+
+            animateElementsOnScroll(myListItems);
+            animateElementsOnScroll(recommendedListItems);
+        });
+
+        function animateElementsOnScroll(elements) {
+            elements.forEach((element, index) => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementPosition < windowHeight - 100) {
+                    // 요소가 화면에 나타나면 애니메이션 적용
+                    element.style.transition = "transform 1s ease";
+                    element.style.transform = "translateY(0)";
+                } else {
+                    // 요소가 화면 밖으로 사라지면 초기 상태로 되돌림
+                    element.style.transition = "none";
+                    element.style.transform = "translateY(100px)"; // 변경 가능한 값
+
+                }
+            });
     </script>
 </body>
 </html>

@@ -11,10 +11,13 @@
         <ul id="recommendedList"></ul>
     </div>
     <div id="mapModal" class="modal">
-        <!-- 카카오 맵이 들어갈 컨테이너 -->
-        <div id="kakaoMap" style="width: 100%; height: calc(100% - 40px);"></div>
-        <!-- 모달 닫기 버튼 -->
-        <span class="close" onclick="closeModal()">닫기</span>
+        <!-- 모달 내용 -->
+        <div class="modal-content">
+            <!-- 카카오 맵이 들어갈 컨테이너 -->
+            <div id="kakaoMap" style="width: 100%; height: 400px;"></div>
+            <!-- 모달 닫기 버튼 -->
+            <span class="close" onclick="closeModal()">&times;</span>
+        </div>
     </div>
     <div class="list-container">
         <h1>패션스팟 목록</h1>
@@ -40,7 +43,6 @@
                     myList.appendChild(li);
                 });
 
-                // myList 아이템들에 이벤트 리스너 추가
                 const items = document.querySelectorAll('#myList .item');
                 items.forEach(item => {
                     item.addEventListener('click', function() {
@@ -55,9 +57,6 @@
                         const map = new kakao.maps.Map(container, options);
                     });
                 });
-
-                // 랜덤 아이템 표시 함수
-                displayRandomItems(data);
             })
             .catch(error => console.error(error));
 
@@ -70,6 +69,7 @@
         function closeModal() {
             mapModal.style.display = 'none';
         }
+
 
         // 랜덤 아이템 표시 함수
         function displayRandomItems(data) {

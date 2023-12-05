@@ -36,7 +36,7 @@
             .then(data => {
                 data.forEach(item => {
                     const li = document.createElement('li');
-                    li.textContent = item.name;
+                    li.textContent = item.description; // 변경된 부분
                     li.classList.add('item');
                     li.setAttribute('data-lat', item.latitude);
                     li.setAttribute('data-lng', item.longitude);
@@ -78,7 +78,7 @@
             const randomItems = getRandomItems(data, 3);
             randomItems.forEach(item => {
                 const li = document.createElement('li');
-                li.textContent = item.name;
+                li.textContent = item.description;
                 recommendedList.appendChild(li);
             });
         }

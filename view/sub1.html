@@ -8,7 +8,7 @@
 <body>
     <div class="recommendations">
         <h1>오늘의 추천 스팟</h1>
-        <ul id="recommendedList"></ul>
+        <ul id="recommendedList"><div id="itemsList"></div></ul>
     </div>
     <div id="mapModal" class="modal">
         <!-- 모달 내용 -->
@@ -21,7 +21,7 @@
     </div>
     <div class="list-container">
         <h1>패션스팟 목록</h1>
-        <ul id="myList"></ul>
+        <ul id="myList"><div id="itemsList"></div></ul>
     </div>
     <h1>더 많은 장소 준비중...</h1>
 
@@ -156,16 +156,8 @@ itemsArray.forEach((item, index) => {
                 }
             });
         }
-        const descriptions = document.querySelectorAll('.description');
-
-descriptions.forEach(description => {
-    description.style.marginTop = '10px';
-    description.style.fontSize = '28px';
-    description.style.cursor = 'pointer';
-    description.style.padding = '0 20px';
-    // 기타 원하는 스타일 추가
-});
-
+        
+        
     </script>
 </body>
 </html>

@@ -20,12 +20,11 @@
     </div>
     <h1>더 많은 장소 준비중...</h1>
 
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c28838cf2a769365bde72d7f8619c87e"></script>
     <script>
         const myList = document.getElementById('myList');
         const recommendedList = document.getElementById('recommendedList');
 
-        fetch('items.json')
+        fetch('./../json/items.json')
             .then(response => response.json())
             .then(data => {
                 data.forEach(item => {
@@ -46,7 +45,7 @@
                     li.appendChild(descriptionPara);
                     li.appendChild(additionalInfo);
 
-                    // 이 부분은 클릭 시 해당 아이템에 대한 지도가 표시되는 부분입니다.
+                    // 클릭 시 해당 아이템에 대한 지도가 표시되는 부분
                     li.addEventListener('click', () => {
                         const mapContainer = document.createElement('div');
                         mapContainer.style.width = '100%';
@@ -79,11 +78,9 @@
                         li.appendChild(itemMapContainer);
                     });
 
-                    // 기존의 아이템 목록에 추가하는 부분입니다.
                     myList.appendChild(li);
                 });
 
-                // 기존의 랜덤 추천 아이템을 표시하는 부분은 유지됩니다.
                 function displayRandomItems() {
                     const randomItems = getRandomItems(data, 3);
 
@@ -109,6 +106,9 @@
             return shuffled.slice(0, count);
         }
     </script>
+    <!-- Kakao 지도 API 스크립트 로드 -->
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=c28838cf2a769365bde72d7f8619c87e"></script>
+
 </body>
 
 </html>

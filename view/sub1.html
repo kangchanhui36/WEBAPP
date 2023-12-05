@@ -156,6 +156,16 @@ itemsArray.forEach((item, index) => {
                 }
             });
         }
+        const descriptions = document.querySelectorAll('.description');
+
+descriptions.forEach(description => {
+    description.style.marginTop = '10px';
+    description.style.fontSize = '28px';
+    description.style.cursor = 'pointer';
+    description.style.padding = '0 20px';
+    // 기타 원하는 스타일 추가
+});
+
     </script>
 </body>
 </html>

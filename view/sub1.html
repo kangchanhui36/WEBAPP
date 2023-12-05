@@ -13,10 +13,19 @@
         <h1>오늘의 추천 스팟</h1>
         <ul id="recommendedList"></ul>
     </div>
+    <div id="mapModal" class="modal">
+        <!-- 카카오 맵이 들어갈 컨테이너 -->
+        <div id="kakaoMap" style="width: 100%; height: calc(100% - 40px);"></div>
+        <!-- 모달 닫기 버튼 -->
+        <span class="close" onclick="closeModal()">닫기</span>
+    </div>
 
     <div class="list-container">
         <h1>패션스팟 목록</h1>
-        <ul id="myList"></ul>
+        <ul id="myList">
+            <li class="item" data-lat="37.5665" data-lng="126.9780">아이템 1</li>
+        <li class="item" data-lat="35.6895" data-lng="139.6917">아이템 2</li>
+        </ul>
     </div>
     <h1>더 많은 장소 준비중...</h1>
 
@@ -105,6 +114,31 @@
             const shuffled = array.sort(() => 0.5 - Math.random());
             return shuffled.slice(0, count);
         }
+        // 모달 열기 함수
+        function openModal() {
+            document.getElementById('mapModal').style.display = 'block';
+        }
+
+        // 모달 닫기 함수
+        function closeModal() {
+            document.getElementById('mapModal').style.display = 'none';
+        }
+
+        // myList 아이템들에 이벤트 리스너 추가
+        const items = document.querySelectorAll('#myList .item');
+        items.forEach(item => {
+            item.addEventListener('click', function() {
+                openModal();
+                const lat = parseFloat(this.getAttribute('data-lat'));
+                const lng = parseFloat(this.getAttribute('data-lng'));
+                const container = document.getElementById('kakaoMap');
+                const options = {
+                    center: new kakao.maps.LatLng(lat, lng),
+                    level: 5
+                };
+                const map = new kakao.maps.Map(container, options);
+            });
+        });
     </script>
     <!-- Kakao 지도 API 스크립트 로드 -->
     <scri src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=c28838cf2a769365bde72d7f8619c87e" async defer></script>

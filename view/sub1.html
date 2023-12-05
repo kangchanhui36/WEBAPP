@@ -84,15 +84,9 @@ itemsArray.forEach((item, index) => {
             position: markerPosition
         });
         kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-    // 클릭한 위치의 좌표 가져오기
-    const latlng = mouseEvent.latLng;
-
-    // Kakao 맵으로 이동하는 URL 구성
-    const kakaoMapURL = `https://map.kakao.com/link/to/${latlng.getLat()},${latlng.getLng()}`;
-
-    // Kakao 맵으로 이동
-    window.open(kakaoMapURL);
-});
+            const spotLink = itemData.spot;
+            window.open(spotLink);
+        });
 
         // 마커 클릭 시 모달 닫기
         kakao.maps.event.addListener(marker, 'click', function() {

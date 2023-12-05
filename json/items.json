@@ -4,83 +4,95 @@
         "description": "가로수길",
         "additionalInfo": "가로수길은 서울의 대표적인 상권으로, 유명 브랜드와 독특한 쇼핑 체험을 제공하는 길로 유명합니다. 가로수와 트렌디한 카페, 레스토랑이 모여있어 쇼핑과 함께 편안한 시간을 보낼 수 있는 곳입니다.",
         "latitude": 37.5210566,
-        "longitude": 127.0228686
+        "longitude": 127.0228686,
+        "spot": " https://kko.to/2C0G25JOUm"
     },
     {
         "imageUrl": "https://url.kr/cvdfk8",
         "description": "명동 패션 거리",
         "additionalInfo": "명동 패션 거리는 서울의 유명한 쇼핑 거리로, 다양한 패션 브랜드와 상점이 모여있어 한국의 최신 패션 트렌드를 경험할 수 있습니다. 명동은 관광객과 현지인들이 모두 자주 찾는 곳으로, 활기찬 분위기와 다채로운 매력을 지닌 지역입니다.",
         "latitude": 37.5609892,
-        "longitude": 126.9861868
+        "longitude": 126.9861868,
+        "spot": "https://place.map.kakao.com/21160648"
     },
     {
         "imageUrl": "https://url.kr/36upen",
         "description": "강남 패션 거리",
         "additionalInfo": "강남 패션 거리는 서울의 유명한 쇼핑 명소로, 고급 브랜드와 트렌디한 의류 매장들이 모여 있어 최신 패션 트렌드를 선도합니다. 특히 강남역 주변은 글로벌 패션과 럭셔리 브랜드가 입점한 곳으로 알려져 있어 스타일리시한 쇼핑 천국으로 손꼽힙니다.",
         "latitude": 37.497952,
-        "longitude":  127.027619
+        "longitude":  127.027619,
+        "spot": " https://place.map.kakao.com/21160803"
     },
     {
         "imageUrl": "https://url.kr/3765he",
         "description": "홍대 패션 거리",
         "additionalInfo": "홍대 패션 거리는 서울의 예술과 창의성이 깃든 지역으로, 독특한 디자인과 다양한 스타일의 의류, 액세서리가 가득한 곳입니다. 거리를 따라 펼쳐진 상점들은 예술가들과 젊은이들 사이에서 유행을 선도한다",
         "latitude": 37.557527,
-        "longitude": 126.9244669
+        "longitude": 126.9244669,
+        "spot": "https://place.map.kakao.com/21160589"
     },
     {
         "imageUrl": "https://url.kr/h8clbn",
         "description": "고속터미널역 지하상가",
         "additionalInfo": "고속터미널역 지하상가는 서울의 대표적인 지하 쇼핑몰로, 다양한 의류, 액세서리 및 식료품 등을 파는 매장들이 모여 있습니다. 현지인과 관광객들이 자주 찾는 이곳은 저렴한 가격과 다양한 상품으로 유명합니다.",
         "latitude": 37.5062379,
-        "longitude": 127.0050378
+        "longitude": 127.0050378,
+        "spot": " https://place.map.kakao.com/27153744"
     },
     {
         "imageUrl": "https://url.kr/5myhp4",
         "description": "성수",
         "additionalInfo": "성수는 서울의 열띤 예술과 문화로 유명한 지역 중 하나로, 독특한 쇼핑 체험과 창의적인 브랜드들이 모여 있는 패션 거리로 손꼽힙니다. 예술적 분위기와 트렌디한 매장들이 어우러진 곳으로, 창의적이고 유니크한 스타일을 추구하는 이들에게 인기가 많습니다.",
         "latitude": 37.544569,
-        "longitude": 127.055974
+        "longitude": 127.055974,
+        "spot": " https://place.map.kakao.com/21160626"
     },
     {
         "imageUrl": "https://url.kr/kovpbj",
         "description": "메세나폴리스몰",
         "additionalInfo": "메세나폴리스몰은 서울의 현대적인 쇼핑 명소로, 다양한 패션 브랜드와 레스토랑이 있는 대규모 쇼핑몰입니다. 현대적인 인테리어와 고급스러운 분위기 속에서 쇼핑과 식사를 동시에 즐길 수 있는 곳으로 알려져 있습니다",
         "latitude": 37.5509108,
-        "longitude": 126.9137604
+        "longitude": 126.9137604,
+        "spot": "https://place.map.kakao.com/22106914"
     },
     {
         "imageUrl": "https://url.kr/d2mxre",
         "description": "스타필드 코엑스",
         "additionalInfo": "스타필드 코엑스는 서울의 대형 쇼핑몰로, 다양한 유명 브랜드와 식음료 매장, 엔터테인먼트 시설이 모여 있습니다. 현대적이고 고급스러운 분위기에서 쇼핑과 문화적 활동을 동시에 즐길 수 있는 명실상부한 쇼핑 및 문화 명소입니다.",
         "latitude": 37.5113686,
-        "longitude": 127.0595931
+        "longitude": 127.0595931,
+        "spot": "https://place.map.kakao.com/8558184"
     },
     {
         "imageUrl": "https://url.kr/ml3kvq",
         "description": "동대문 쇼핑타운",
         "additionalInfo": "동대문 쇼핑타운은 서울의 대표적인 쇼핑 명소로, 대규모 도매시장과 최신 패션 트렌드를 선도하는 쇼핑센터로 유명합니다. 다양한 옷감, 액세서리, 패션 아이템들을 저렴한 가격에 구매할 수 있으며, 끊임없는 활기찬 분위기가 특징입니다",
         "latitude": 37.5675841,
-        "longitude":  127.0122873
+        "longitude":  127.0122873,
+        "spot": " https://place.map.kakao.com/25459316"
     },
     {
         "imageUrl": "https://url.kr/82oqhj",
         "description": "이대 패션거리",
         "additionalInfo": "이대 패션거리는 서울 이대역 인근에 위치한 지역으로, 다양한 패션 쇼핑 체험을 제공합니다. 이 지역은 학문과 패션, 예술이 융합된 분위기를 자랑하며, 특히 학생들과 예술가들이 모여 다양한 스타일의 의류, 액세서리를 즐겨 찾는 곳으로 알려져 있습니다. ",
         "latitude": 37.556761,
-        "longitude": 126.945857
+        "longitude": 126.945857,
+        "spot": " https://place.map.kakao.com/21160628"
     },
     {
         "imageUrl": "https://url.kr/6u2aey",
         "description": "서울역 롯데아울렛",
         "additionalInfo": "서울역 롯데아울렛은 한국의 대표적인 아울렛 쇼핑몰로, 다양한 브랜드의 패션 아이템을 할인된 가격에 만나볼 수 있는 곳이며 뛰어난 쇼핑 환경과 함께 다양한 이벤트와 프로모션을 진행하여 방문객들에게 즐거운 경험을 제공하고 있습니다.",
         "latitude": 37.5547381,
-        "longitude":  126.9704057
+        "longitude":  126.9704057,
+        "spot": " https://place.map.kakao.com/18619498"
     },
     {
         "imageUrl": "https://url.kr/if45yg",
         "description": "더 현대 서울",
         "additionalInfo": "더 현대 서울 패션거리는 서울의 현대 건축과 트렌디한 패션의 만남지로, 고급 브랜드와 독특한 디자이너 샵이 즐비한 지역입니다. 현대 아트 뮤지엄과 인접하여 예술적인 분위기를 갖추고 있습니다",
         "latitude": 37.5258975,
-        "longitude": 126.9284261
+        "longitude": 126.9284261,
+        "spot": "https://place.map.kakao.com/1662602781"
     }
 ]   

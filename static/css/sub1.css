@@ -185,3 +185,13 @@
             font-size: 12px;
             white-space: nowrap;
         }
+        #kakaoMap {
+            z-index: 1; /* 지도의 z-index 값 설정 */
+            position: relative; /* 위치를 설정하여 다른 요소와 겹치지 않도록 함 */
+        }
+    
+        /* 모달이나 기타 팝업 요소 등을 표시하는 경우 */
+        .modal {
+            z-index: 2; /* 모달의 z-index 값 설정 (지도보다 높은 값으로 설정) */
+            /* 나머지 스타일링 속성들 */
+        }

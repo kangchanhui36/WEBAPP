@@ -53,8 +53,12 @@
                 });
 
                 const itemList = document.querySelectorAll('#myList .item');
-for (let index = 0; index < itemList.length; index++) {
-    const item = itemList[index];
+                
+const itemsArray = Array.from(itemList); // NodeList를 배열로 변환
+
+itemsArray.forEach((item, index) => {
+    const itemData = items[index]; // 현재 아이템에 대응하는 데이터 가져오기
+
     item.addEventListener('click', function() {
         openModal();
         const lat = parseFloat(this.getAttribute('data-lat'));
@@ -73,7 +77,7 @@ for (let index = 0; index < itemList.length; index++) {
         });
         marker.setMap(map); // 맵에 마커 표시
 
-        const content = '<div class="overlay">' + items[index].description + '</div>';
+        const content = '<div class="overlay">' + itemData.description + '</div>';
         const overlay = new kakao.maps.CustomOverlay({
             content: content,
             map: map,
@@ -85,7 +89,7 @@ for (let index = 0; index < itemList.length; index++) {
             closeModal();
         });
     });
-}
+});
 
 
                 // 랜덤 아이템 표시 함수 호출

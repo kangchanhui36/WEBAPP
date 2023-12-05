@@ -60,6 +60,7 @@
                             center: new kakao.maps.LatLng(lat, lng),
                             level: 5
                         };
+                        
                         const map = new kakao.maps.Map(container, options);
                     });
                 });
@@ -68,6 +69,38 @@
                 displayRandomItems(data);
             })
             .catch(error => console.error(error));
+            items.forEach(item => {
+    item.addEventListener('click', function() {
+        openModal();
+        const lat = parseFloat(this.getAttribute('data-lat'));
+        const lng = parseFloat(this.getAttribute('data-lng'));
+        const container = document.getElementById('kakaoMap');
+        const options = {
+            center: new kakao.maps.LatLng(lat, lng),
+            level: 5,
+            zoomControl: true // Adding zoom control
+        };
+        const map = new kakao.maps.Map(container, options);
+
+        const markerPosition = new kakao.maps.LatLng(lat, lng);
+        const marker = new kakao.maps.Marker({
+            position: markerPosition
+        });
+        marker.setMap(map); // Display marker on the map
+
+        const content = '<div class="overlay">' + this.textContent + '</div>';
+        const overlay = new kakao.maps.CustomOverlay({
+            content: content,
+            map: map,
+            position: markerPosition
+        });
+
+        // Close modal on marker click
+        kakao.maps.event.addListener(marker, 'click', function() {
+            closeModal();
+        });
+    });
+});
 
         // 모달 열기 함수
         function openModal() {

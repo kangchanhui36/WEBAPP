@@ -53,38 +53,40 @@
                 });
 
                 const itemList = document.querySelectorAll('#myList .item');
-                itemList.forEach(item => {
-                    item.addEventListener('click', function() {
-                        openModal();
-                        const lat = parseFloat(this.getAttribute('data-lat'));
-                        const lng = parseFloat(this.getAttribute('data-lng'));
-                        const container = document.getElementById('kakaoMap');
-                        const options = {
-                            center: new kakao.maps.LatLng(lat, lng),
-                            level: 5,
-                            zoomControl: true // 줌 컨트롤 활성화
-                        };
-                        const map = new kakao.maps.Map(container, options);
+for (let index = 0; index < itemList.length; index++) {
+    const item = itemList[index];
+    item.addEventListener('click', function() {
+        openModal();
+        const lat = parseFloat(this.getAttribute('data-lat'));
+        const lng = parseFloat(this.getAttribute('data-lng'));
+        const container = document.getElementById('kakaoMap');
+        const options = {
+            center: new kakao.maps.LatLng(lat, lng),
+            level: 5,
+            zoomControl: true // 줌 컨트롤 활성화
+        };
+        const map = new kakao.maps.Map(container, options);
 
-                        const markerPosition = new kakao.maps.LatLng(lat, lng);
-                        const marker = new kakao.maps.Marker({
-                            position: markerPosition
-                        });
-                        marker.setMap(map); // 맵에 마커 표시
+        const markerPosition = new kakao.maps.LatLng(lat, lng);
+        const marker = new kakao.maps.Marker({
+            position: markerPosition
+        });
+        marker.setMap(map); // 맵에 마커 표시
 
-                        const content = '<div class="overlay">' + items[index].description + '</div>';
-                        const overlay = new kakao.maps.CustomOverlay({
-                            content: content,
-                            map: map,
-                            position: markerPosition
-                        });
+        const content = '<div class="overlay">' + items[index].description + '</div>';
+        const overlay = new kakao.maps.CustomOverlay({
+            content: content,
+            map: map,
+            position: markerPosition
+        });
 
-                        // 마커 클릭 시 모달 닫기
-                        kakao.maps.event.addListener(marker, 'click', function() {
-                            closeModal();
-                        });
-                    });
-                });
+        // 마커 클릭 시 모달 닫기
+        kakao.maps.event.addListener(marker, 'click', function() {
+            closeModal();
+        });
+    });
+}
+
 
                 // 랜덤 아이템 표시 함수 호출
                 displayRandomItems(items);

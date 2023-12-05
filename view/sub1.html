@@ -57,6 +57,9 @@
                         const map = new kakao.maps.Map(container, options);
                     });
                 });
+
+                // 랜덤 아이템 표시 함수 호출
+                displayRandomItems(data);
             })
             .catch(error => console.error(error));
 
@@ -70,21 +73,17 @@
             mapModal.style.display = 'none';
         }
 
-
         // 랜덤 아이템 표시 함수
         function displayRandomItems(data) {
             const randomItems = getRandomItems(data, 3);
             randomItems.forEach(item => {
                 const li = document.createElement('li');
                 li.textContent = item.name;
-                li.classList.add('item');
-                li.setAttribute('data-lat', item.latitude);
-                li.setAttribute('data-lng', item.longitude);
                 recommendedList.appendChild(li);
             });
         }
 
-        // 랜덤 아이템 선택 함수
+        // 랜덤 아이템 반환 함수
         function getRandomItems(array, count) {
             const shuffled = array.sort(() => 0.5 - Math.random());
             return shuffled.slice(0, count);

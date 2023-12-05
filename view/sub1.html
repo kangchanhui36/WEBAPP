@@ -25,9 +25,9 @@
     </div>
     <h1>더 많은 장소 준비중...</h1>
 
-    <script src="https://t1.daumcdn.net/mapjsapi/js/main/4.4.14/kakao.js"></script>
+    <!-- Kakao 지도 API 스크립트 로드 -->
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=dd22c9aa1c7163f06595cefd908ec5ae"></script>
     <script>
-        const kakaoApiKey = 'dd22c9aa1c7163f06595cefd908ec5aeh';
         const myList = document.getElementById('myList');
         const mapModal = document.getElementById('mapModal');
         const recommendedList = document.getElementById('recommendedList');
@@ -37,11 +37,7 @@
             .then(data => {
                 data.forEach(item => {
                     const li = document.createElement('li');
-                    li.innerHTML = `
-                        <img src="${item.imageUrl}" alt="${item.description}" />
-                        <p>${item.description}</p>
-                        <p>${item.additionalInfo}</p>
-                    `;
+                    li.textContent = item.name;
                     li.classList.add('item');
                     li.setAttribute('data-lat', item.latitude);
                     li.setAttribute('data-lng', item.longitude);
@@ -83,11 +79,7 @@
             const randomItems = getRandomItems(data, 3);
             randomItems.forEach(item => {
                 const li = document.createElement('li');
-                li.innerHTML = `
-                    <img src="${item.imageUrl}" alt="${item.description}" />
-                    <p>${item.description}</p>
-                    <p>${item.additionalInfo}</p>
-                `;
+                li.textContent = item.name;
                 recommendedList.appendChild(li);
             });
         }

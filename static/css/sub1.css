@@ -1,0 +1,138 @@
+@font-face {
+    font-family: 'OAGothic-ExtraBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/OAGothic-ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+}
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'OAGothic-ExtraBold';
+            
+
+        }
+
+        body {
+            background-color: #fff; 
+        }
+        
+
+        /* 로고 바 스타일링 */
+        .logo-bar {
+            background-color: #F8FDCF;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 180px;
+        }
+
+        /* 추천 스팟 스타일링 */
+        .recommendations {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            flex-wrap: wrap;
+            padding: 20px 30px;
+            background-color: #070946;
+            margin-bottom: 30px;
+        }
+
+        /* 목록 스타일링 */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        li {
+            width: 350px;
+            height: 450px;
+            background-color: #fff;
+            box-shadow: #7F4B96;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 36px;
+            box-shadow: 0 2px 10px #7F4B96;
+            display: flex;
+            flex-direction: column;
+            /* opacity: 0.8; */
+            gap: 10px;
+        }
+
+
+        .item-description {
+            margin-top: 10px;
+            font-size: 28px;
+            cursor: pointer;
+            cursor: auto;
+            padding: 0 20px;
+
+        }
+
+        img {
+            width: 87%;
+            height: 45%;
+            margin: 0 auto;
+            font-size: 32px;
+            /* border-radius: 36px; */
+        }
+
+        .list-container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            
+        }
+
+        #recommendedList {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-bottom: 200px;
+            
+        }
+
+        #myList {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            
+            
+        }
+
+        .logo-bar img {
+            width: 200px;
+            height: 200px;
+
+        }
+
+        .recommendations h1 {
+            padding: 50px;
+            font-size: 50px;
+            color: #fff;
+        }
+        .list-container h1, h1{
+            padding: 50px;
+            font-size: 50px;
+            color: #000;
+            text-align: center;
+        }
+        
+        /* .addtionalInfo {
+            width: 85%;
+            font-size: 20px;
+            margin: 0 auto;
+        } */
+        .additional-info {
+            font-size: 15px;
+            color: #000;
+            margin-top: 8px;
+            padding: 0 20px;
+        }
+        
+        

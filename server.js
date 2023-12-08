@@ -1,41 +1,20 @@
-// server.js
-
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
 
+const app = express();
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
-let postData = {
-  posts: []
-};
-
-app.get('/posts', (req, res) => {
-  res.json(postData);
+// POST 요청을 받는 엔드포인트 설정
+app.post('/savePost', (req, res) => {
+  const postContent = req.body.content;
+  // 여기서 postContent를 원하는 방식으로 저장하거나 활용합니다.
+  console.log('게시글 내용:', postContent);
+  // 클라이언트에 응답 전송 (예: 저장되었다는 메시지 전송)
+  res.json({ message: '게시글이 서버에 저장되었습니다.' });
 });
 
-app.post('/posts', (req, res) => {
-  const { content } = req.body;
-  const newPost = {
-    content: content,
-    comments: []
-  };
-  postData.posts.push(newPost);
-  res.json(postData);
-});
-
-app.post('/comments/:postId', (req, res) => {
-  const { postId } = req.params;
-  const { content } = req.body;
-  const newComment = {
-    content: content
-  };
-  postData.posts[postId].comments.push(newComment);
-  res.json(postData);
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+// 서버를 3000 포트에서 실행
+app.listen(3000, () => {
+  console.log('서버가 3000 포트에서 실행 중입니다.');
 });

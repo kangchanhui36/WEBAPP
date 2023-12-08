@@ -103,7 +103,7 @@
       event.preventDefault();
       const postContent = document.getElementById('postContent').value;
       if (postContent.trim() !== '') {
-        fetch('https://localhost:3000', {
+        fetch('https://fashioninseoul.netlify.app/savePost', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

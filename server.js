@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors'); // cors 모듈 임포트
 
 const app = express();
 
 app.use(bodyParser.json());
+app.use(cors()); // 모든 도메인에서의 요청 허용
 
 // POST 요청을 받는 엔드포인트 설정
 app.post('/savePost', (req, res) => {

@@ -101,31 +101,30 @@
       </div>
     
       <script>
-        document.getElementById('postForm').addEventListener('submit', function (event) {
-          event.preventDefault();
-          const postContent = document.getElementById('postContent').value;
-          if (postContent.trim() !== '') {
-            fetch('https://fashioninseoul.netlify.app/savePost', {  // 수정된 부분
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ content: postContent }),
-            })
-              .then(response => response.json())
-              .then(data => {
-                console.log(data.message);
-                // 서버로부터 받은 응답 처리
-              })
-              .catch(error => {
-                console.error('게시글을 서버에 전송하는 중 오류가 발생했습니다:', error);
-                // 오류 처리
-              });
-            document.getElementById('postContent').value = ''; // 게시글 작성 후 입력 필드 초기화
-          }
+        document.getElementById('postForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const postContent = document.getElementById('postContent').value;
+            if (postContent.trim() !== '') {
+                fetch('/savePost', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ content: postContent }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data.message);
+                        // 서버로부터 받은 응답 처리
+                    })
+                    .catch(error => {
+                        console.error('게시글을 서버에 전송하는 중 오류가 발생했습니다:', error);
+                        // 오류 처리
+                    });
+                document.getElementById('postContent').value = ''; // 게시글 작성 후 입력 필드 초기화
+            }
         });
-      </script>
-      
+    </script>
     </body>
     
     </html>

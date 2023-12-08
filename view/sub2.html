@@ -105,13 +105,13 @@
           event.preventDefault();
           const postContent = document.getElementById('postContent').value;
           if (postContent.trim() !== '') {
-            fetch('/savePost', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ content: postContent }),
-              })
+            fetch('https://fashioninseoul.netlify.app/savePost', {  // 수정된 부분
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ content: postContent }),
+            })
               .then(response => response.json())
               .then(data => {
                 console.log(data.message);
@@ -125,6 +125,7 @@
           }
         });
       </script>
+      
     </body>
     
     </html>

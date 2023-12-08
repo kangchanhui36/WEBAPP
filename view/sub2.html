@@ -1,3 +1,4 @@
+<!-- 여기는 HTML -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,72 +27,27 @@
     </div>
 
     <script>
-        let postData = {
-          posts: []
-        };
-
-        const savedData = localStorage.getItem('savedData');
-        if (savedData) {
-          postData = JSON.parse(savedData);
-          displayPosts();
-        }
-
-        function saveData() {
-          localStorage.setItem('savedData', JSON.stringify(postData));
-        }
-
-        function createPost(content) {
-          const newPost = {
-            content: content,
-            comments: []
-          };
-          postData.posts.push(newPost);
-          saveData();
-          displayPosts();
-        }
-
-        function addComment(button) {
-          const commentInput = button.previousElementSibling;
-          const commentContent = commentInput.value;
-          const postId = button.closest('.post').getAttribute('data-id');
-          const newComment = {
-            content: commentContent
-          };
-          postData.posts[postId].comments.push(newComment);
-          saveData();
-          displayPosts();
-        }
-
-        function displayPosts() {
-          const postsContainer = document.getElementById('posts');
-          postsContainer.innerHTML = '';
-          postData.posts.forEach((post, index) => {
-            const postElement = document.createElement('div');
-            postElement.classList.add('post');
-            postElement.setAttribute('data-id', index);
-            postElement.innerHTML = `
-              <p>${post.content}</p>
-              <div class="comments">
-                <input type="text" placeholder="댓글 달기">
-                <button onclick="addComment(this)">댓글</button>
-              </div>
-            `;
-            post.comments.forEach(comment => {
-              const commentElement = document.createElement('div');
-              commentElement.classList.add('comment');
-              commentElement.textContent = comment.content;
-              postElement.querySelector('.comments').appendChild(commentElement);
-            });
-            postsContainer.appendChild(postElement);
-          });
-        }
-
-        const postForm = document.getElementById('postForm');
-        postForm.addEventListener('submit', function(event) {
+        // 클라이언트 측 JavaScript 코드
+        document.getElementById('postForm').addEventListener('submit', function(event) {
           event.preventDefault();
           const postContent = document.getElementById('postContent').value;
           if (postContent.trim() !== '') {
-            createPost(postContent);
+            fetch('fashioninseoul.netlify.app', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ content: postContent }),
+            })
+            .then(response => response.json())
+            .then(data => {
+              console.log('게시글이 서버에 전송되었습니다.');
+              // 성공적으로 서버에 데이터를 전송한 후에 할 작업들
+            })
+            .catch(error => {
+              console.error('게시글을 전송하는 중 오류가 발생했습니다:', error);
+              // 전송 실패 시 수행할 작업들
+            });
             document.getElementById('postContent').value = ''; // 게시글 작성 후 입력 필드 초기화
           }
         });

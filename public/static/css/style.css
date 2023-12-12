@@ -73,11 +73,11 @@ body {
   }
 
   .image1 {
-    background-image: url('/img/main1.jpg');
+    background-image: url('/public/img/main1.jpg');
   }
 
   .image2 {
-    background-image: url('/img/main2.jpg');
+    background-image: url('/public/img/main2.jpg');
   }
 
   @media (max-width: 768px) {

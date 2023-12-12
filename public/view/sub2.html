@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Community | 커뮤니티</title>
+        <link rel="stylesheet" href="/static/css/sub2.css">
+        
+    </head>
+    
+    <body>
+      <div class="container">
+        <h1>커뮤니티</h1>
+    
+        <form id="postForm">
+          <textarea id="postContent" placeholder="게시글을 작성하세요"></textarea>
+          <!-- 추가된 별점 기능 -->
+          <div class="rating">
+            <span class="rating__label">별점:</span>
+            <input type="radio" name="chk_info" value="1" id="star1" class="rating__input">
+            <label for="star1" class="rating__star">1점</label>
+
+            <input type="radio" name="chk_info" value="2" id="star2" class="rating__input">
+            <label for="star2" class="rating__star">2점</label>
+
+            <input type="radio" name="chk_info" value="3" id="star3" class="rating__input">
+            <label for="star3" class="rating__star">3점</label>
+
+            <input type="radio" name="chk_info" value="4" id="star4" class="rating__input">
+            <label for="star4" class="rating__star">4점</label>
+
+            <input type="radio" name="chk_info" value="5" id="star5" class="rating__input">
+            <label for="star5" class="rating__star">5점</label>
+        </div>
+
+          <button type="submit">게시</button>
+        </form>
+    
+        <div id="posts">
+          <!-- 게시글 목록 -->
+        </div>
+      </div>
+    
+      <script src="/public/static/js/sub2.js"></script>
+      
+    </body>
+    
+    </html>
+    

@@ -1,12 +1,11 @@
 const postForm = document.getElementById('postForm');
-        const postContent = document.getElementById('postContent');
-        const postsContainer = document.getElementById('posts');
-
-        postForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            createPost(postContent.value, getRating());
-            postContent.value = ''; // 게시글 작성 후 입력 필
-        });
+const postContent = document.getElementById('postContent');
+const postsContainer = document.getElementById('posts');
+postForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      createPost(postContent.value, getRating());
+      postContent.value = ''; // 게시글 작성 후 입력 필
+});
         
 document.getElementById('postForm').addEventListener('submit', function(event) {
     event.preventDefault();
